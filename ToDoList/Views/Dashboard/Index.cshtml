@@ -1,0 +1,125 @@
+﻿@model ToDoList.Models.DashboardViewModel
+@using ToDoList.Helpers
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<head>
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+</head>
+
+<h1>Dashboard</h1>
+
+<a asp-controller="Tasks" asp-action="Create" class="btn btn-success mb-3">Add New Task</a>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- UPCOMING TASKS -->
+        <div class="col-md-3">
+            <h4>Upcoming Tasks</h4>
+            @if (Model.UpcomingTasks.Any())
+            {
+                @foreach (var task in Model.UpcomingTasks)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@task.Title</h5>
+                            <p class="card-text">Due: @task.DueDate.ToString("dd.MM.yyyy")</p>
+                            <p class="card-text">Priority: @task.PriorityStatus</p>
+                            <div class="task-buttons">
+                                <a asp-action="Edit" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-action="Delete" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-sm btn-danger">Delete</a>
+                                <a asp-action="Details" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-info btn-sm ml-2">View</a>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No upcoming tasks.</p>
+            }
+        </div>
+
+        <!-- IN PROGRESS TASKS -->
+        <div class="col-md-3">
+            <h4>In Progress Tasks</h4>
+            @if (Model.InProgressTasks.Any())
+            {
+                @foreach (var task in Model.InProgressTasks)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@task.Title</h5>
+                            <p class="card-text">Due: @task.DueDate.ToString("dd.MM.yyyy")</p>
+                            <p class="card-text">Priority: @task.PriorityStatus</p>
+                            <div class="task-buttons">
+                                <a asp-action="Edit" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-action="Delete" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-sm btn-danger">Delete</a>
+                                <a asp-action="Details" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-info btn-sm ml-2">View</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No tasks in progress.</p>
+            }
+        </div>
+
+        <!-- COMPLETED TASKS-->
+        <div class="col-md-3">
+            <h4>Completed Tasks</h4>
+            @if (Model.CompletedTasks.Any())
+            {
+                @foreach (var task in Model.CompletedTasks)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@task.Title</h5>
+                            <p class="card-text">Completed on: @task.DueDate.ToString("dd.MM.yyyy")</p>
+                            <div class="task-buttons">
+                                <a asp-action="Edit" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-action="Delete" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-sm btn-danger">Delete</a>
+                                <a asp-action="Details" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-info btn-sm ml-2">View</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No completed tasks.</p>
+            }
+        </div>
+
+        <!-- OVERDUE TASKS -->
+        <div class="col-md-3">
+            <h4>Overdue Tasks</h4>
+            @if (Model.OverdueTasks.Any())
+            {
+                @foreach (var task in Model.OverdueTasks)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@task.Title</h5>
+                            <p class="card-text">Was due on: @task.DueDate.ToString("dd.MM.yyyy")</p>
+                            <p class="card-text">Priority: @task.PriorityStatus</p>
+                            <div class="task-buttons">
+                                <a asp-action="Edit" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-action="Delete" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-sm btn-danger">Delete</a>
+                                <a asp-action="Details" asp-controller="Tasks" asp-route-encodedId="@IdEncoderHelper.EncodeId(task.Id)" class="btn btn-info btn-sm ml-2">View</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No overdue tasks.</p>
+            }
+        </div>
+    </div>
+</div>
